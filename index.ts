@@ -1,17 +1,17 @@
 console.log('test')
 
 function test(): void {
-  const message = " this is a test"
+  const message = ' this is a test'
   console.log(message)
   const complexObject = {
     prop: 'some detail',
     obj: {
-      				prop: {
+      prop: {
         obj: {
-          	val: "asdas"
-        }
-      }
-    }
+          val: 'asdas',
+        },
+      },
+    },
   }
 
   console.log(complexObject)
