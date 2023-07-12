@@ -2,10 +2,13 @@
   "name": "create-cdk-typescript",
   "version": "1.0.0",
   "description": "Command Line utility to bootstrap a TypeScript CDK project",
-  "main": "index",
+  "main": "lib/index.js",
   "type": "module",
   "scripts": {
     "test": "vitest"
+  },
+  "bin": {
+    "create-cdkts": "./bin/create-cdkts.js"
   },
   "repository": {
     "type": "git",
