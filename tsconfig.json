@@ -99,6 +99,7 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "exclude": [
+    "package.json",
     "vite.config.ts",
     "create-cdkts.js"
   ]
