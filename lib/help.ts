@@ -25,6 +25,7 @@ const help = `
                                           dependencies. Valid options are npm,
                                           yarn, and pnpm. Defaults to npm.
   -o, --override                          Override existing CDK configuration
+  -y, --yes                               Run using all the default settings.
   -h, --help                              Show this help message
 
   Examples:

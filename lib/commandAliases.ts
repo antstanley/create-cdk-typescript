@@ -7,5 +7,5 @@ export const commandAliases: { [key: string]: string } = {
   p: 'package-manager',
   o: 'override',
   h: 'help',
-  v: 'version'
+  y: 'yes'
 };
