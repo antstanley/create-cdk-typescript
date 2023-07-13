@@ -31,8 +31,7 @@ const help = `
   Examples:
 
   # scaffold a CDK project in the directory 'new-project' to use ES modules
-  # with the CDK files placed in ./src/cdk/ directory.
-
+  # with the CDK files placed in ./src/cdk/ directory
   npx create-cdkts --root new-project/ --dir src/cdk --esm
 
   Notes:
