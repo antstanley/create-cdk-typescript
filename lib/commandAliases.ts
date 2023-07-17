@@ -3,7 +3,6 @@ export const commandAliases: { [key: string]: string } = {
   r: 'root',
   d: 'dir',
   t: 'test',
-  e: 'esm',
   p: 'package-manager',
   o: 'override',
   h: 'help',
