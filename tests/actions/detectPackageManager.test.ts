@@ -87,4 +87,10 @@ describe('add correct scripts to package.json', () => {
     const result = detectPackageManager(workingDirBase)
     expect(result).toBe('npm')
   })
+
+  test('check over ride on package manger detection', () => {
+    const result = detectPackageManager(workingDirBase, "yarn")
+    expect(result).toBe('yarn')
+  })
+
 })

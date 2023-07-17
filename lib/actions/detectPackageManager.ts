@@ -6,11 +6,9 @@ function detectEngineByFile(contents: string[], fileNames: string[]): boolean {
   return intersection.length > 0
 }
 
-function detectPackageManager(currentPath: string): string {
-  // default engine is npm, set that upfront. Only try to detect pnpm and yarn.
+function detect(currentPath: string): string {
   let engine: string = 'npm'
   try {
-
     const dirContents = readdirSync(currentPath, 'utf8')
 
     const pnpmFiles = ["pnpm-lock.yaml", "pnpm-workspace.yaml", ".pnpmfile.cjs"]
@@ -34,6 +32,25 @@ function detectPackageManager(currentPath: string): string {
         }
       }
     }
+
+  } catch (error) {
+    console.warn(error)
+  }
+  return engine
+}
+
+function detectPackageManager(currentPath: string, packageManager: PackageOptions = 'auto'): string {
+  // default engine is npm, set that upfront. Only try to detect pnpm and yarn.
+  let engine: string = 'npm'
+  try {
+
+    if (packageManager !== 'auto') {
+      if (['npm', 'yarn', 'pnpm'].includes(packageManager)) engine = packageManager
+    }
+    else {
+      engine = detect(currentPath)
+    }
+
   } catch (error) {
     console.warn(error)
   }
