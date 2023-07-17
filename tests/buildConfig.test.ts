@@ -105,7 +105,7 @@ describe('generate config to be used', () => {
     expect(result).toStrictEqual(expectedConfig)
   })
 
-  test('when option "package-manager" is not specified', () => {
+  test('when option "packageManager" is not specified', () => {
     const args = {}
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'auto' }
@@ -115,8 +115,8 @@ describe('generate config to be used', () => {
     expect(result).toStrictEqual(expectedConfig)
   })
 
-  test('when option "package-manager" = "auto"', () => {
-    const args = { 'package-manager': 'auto' }
+  test('when option "packageManager" = "auto"', () => {
+    const args = { packageManager: 'auto' }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'auto' }
     }
@@ -125,8 +125,8 @@ describe('generate config to be used', () => {
     expect(result).toStrictEqual(expectedConfig)
   })
 
-  test('when option "package-manager" = "npm"', () => {
-    const args = { 'package-manager': 'npm' }
+  test('when option "packageManager" = "npm"', () => {
+    const args = { "package-manager": 'npm' }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'npm' }
     }
