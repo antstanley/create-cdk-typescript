@@ -8,17 +8,15 @@ function buildConfig(args: Arguments): Config {
     dir: './cdk',
     test: 'none',
     packageManager: 'auto',
-    override: false
+    override: false,
   }
   try {
     // check if config file is specified, if it is use that exclusively
     if (args?.config) {
       config = fetchConfig(args?.config)
     } else {
-
       // if 'yes' option specified, use default config, ignore all other options
       if (!args.yes) {
-
         if (args?.root) {
           if (isAbsolute(args.root)) {
             config.root = args.root
@@ -32,24 +30,28 @@ function buildConfig(args: Arguments): Config {
         }
 
         if (args.test) {
-          if (["none", "jest", "vitest"].includes(args.test)) {
+          if (['none', 'jest', 'vitest'].includes(args.test)) {
             config.test = args.test
           } else {
-            console.warn(`Invalid option for option '-t | --test'. ${args?.test} not recognised. Using default ('none').`)
+            console.warn(
+              `Invalid option for option '-t | --test'. ${args?.test} not recognised. Using default ('none').`,
+            )
           }
         }
 
         if (args?.packageManager) {
-          if (["npm", "yarn", "pnpm", "auto"].includes(args.packageManager)) {
+          if (['npm', 'yarn', 'pnpm', 'auto'].includes(args.packageManager)) {
             config.packageManager = args.packageManager
           } else {
-            console.warn(`Invalid option for option '-p | --package-manager'. ${args?.packageManager} not recognised. Using default ('npm')`)
+            console.warn(
+              `Invalid option for option '-p | --package-manager'. ${args?.packageManager} not recognised. Using default ('npm')`,
+            )
           }
         }
       }
     }
   } catch (error) {
-    console.warn(error, "\nUsing default configuration options")
+    console.warn(error, '\nUsing default configuration options')
   }
 
   return config

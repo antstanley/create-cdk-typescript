@@ -8,22 +8,24 @@ const defaultConfig: Config = {
   dir: './cdk',
   test: 'none',
   packageManager: 'auto',
-  override: false
+  override: false,
 }
 
 const workingDirBase = join(process.cwd(), 'fetch-config-test')
 
 const testPaths = {
-  'config': join(workingDirBase, 'config')
+  config: join(workingDirBase, 'config'),
 }
 
-
 describe('fetch config to be used', () => {
-
   beforeAll(() => {
     if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
     mkdirSync(testPaths['config'], { recursive: true })
-    writeFileSync(join(testPaths['config'], 'config.json'), JSON.stringify(defaultConfig), 'utf8')
+    writeFileSync(
+      join(testPaths['config'], 'config.json'),
+      JSON.stringify(defaultConfig),
+      'utf8',
+    )
   })
 
   afterAll(() => {

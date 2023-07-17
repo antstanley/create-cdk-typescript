@@ -21,7 +21,6 @@ function prepareJest(currentPath: string, testFramework?: string): boolean {
         result = true
       }
     }
-
   } catch (error) {
     console.warn(error)
   }

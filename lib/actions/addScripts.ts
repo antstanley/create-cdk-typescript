@@ -11,7 +11,7 @@ function addScripts(currentPath: string, testFramework: string): boolean {
   let result = false
   try {
     const newScripts: PackageScripts = {
-      'deploy': 'cdk deploy --all'
+      deploy: 'cdk deploy --all',
     }
 
     if (testFramework !== 'none') {
@@ -21,7 +21,9 @@ function addScripts(currentPath: string, testFramework: string): boolean {
     const packageJsonPath = join(currentPath, 'package.json')
     if (existsSync(packageJsonPath)) {
       const packageJsonFile = readFileSync(packageJsonPath, 'utf8')
-      const packageJson: { scripts?: { [index: string]: string } } = JSON.parse(stripJsonComments(packageJsonFile))
+      const packageJson: { scripts?: { [index: string]: string } } = JSON.parse(
+        stripJsonComments(packageJsonFile),
+      )
 
       if (typeof packageJson.scripts === 'object') {
         packageJson.scripts = Object.assign(packageJson.scripts, newScripts)
@@ -32,7 +34,10 @@ function addScripts(currentPath: string, testFramework: string): boolean {
       result = true
     } else {
       result = false
-      console.warn('Unable to find package.json file to add scripts to', currentPath)
+      console.warn(
+        'Unable to find package.json file to add scripts to',
+        currentPath,
+      )
     }
   } catch (error) {
     console.warn(error)

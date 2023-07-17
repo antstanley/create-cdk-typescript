@@ -1,14 +1,14 @@
 enum TestOptions {
-  None = "none",
-  Jest = "jest",
-  Vitest = "vitest"
+  None = 'none',
+  Jest = 'jest',
+  Vitest = 'vitest',
 }
 
 enum PackageOptions {
-  Npm = "npm",
-  Yarn = "yarn",
-  Pnpm = "pnpm",
-  Auto = "auto"
+  Npm = 'npm',
+  Yarn = 'yarn',
+  Pnpm = 'pnpm',
+  Auto = 'auto',
 }
 
 type Config = {

@@ -1,7 +1,15 @@
-function prepareInstall(command: string, test: string): { command: string, args: string[] } {
+function prepareInstall(
+  command: string,
+  test: string,
+): { command: string; args: string[] } {
   let args: string[] = []
   try {
-    args = ['aws-cdk@latest', 'aws-cdk-lib@latest', 'typescript@latest', 'ts-node@latest']
+    args = [
+      'aws-cdk@latest',
+      'aws-cdk-lib@latest',
+      'typescript@latest',
+      'ts-node@latest',
+    ]
 
     if (test === 'vitest') {
       args.push('vitest@latest')

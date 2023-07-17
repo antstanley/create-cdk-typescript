@@ -1,10 +1,7 @@
 function newProject(config: Config): boolean {
   let result = false
   try {
-
-  } catch (error) {
-
-  }
+  } catch (error) {}
   return result
 }
 

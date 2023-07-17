@@ -1,5 +1,11 @@
 import { describe, test, beforeAll, afterAll, expect } from 'vitest'
-import { mkdirSync, rmSync, existsSync, writeFileSync, readFileSync } from 'node:fs'
+import {
+  mkdirSync,
+  rmSync,
+  existsSync,
+  writeFileSync,
+  readFileSync,
+} from 'node:fs'
 import { join } from 'node:path'
 import detectPackageManager from '../../lib/actions/detectPackageManager.js'
 
@@ -9,7 +15,7 @@ const testPaths = {
   'pnpm-file': join(workingDirBase, 'pnpm-file'),
   'yarn-file': join(workingDirBase, 'yarn-file'),
   'pnpm-package': join(workingDirBase, 'pnpm-package'),
-  'yarn-package': join(workingDirBase, 'yarn-package')
+  'yarn-package': join(workingDirBase, 'yarn-package'),
 }
 
 const packageJsonPnpm = `
@@ -28,17 +34,21 @@ const packageJsonYarn = `
   }
   `
 
-
 describe('add correct scripts to package.json', () => {
-
   beforeAll(() => {
     if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
     mkdirSync(testPaths['pnpm-file'], { recursive: true })
     mkdirSync(testPaths['yarn-file'], { recursive: true })
     mkdirSync(testPaths['pnpm-package'], { recursive: true })
     mkdirSync(testPaths['yarn-package'], { recursive: true })
-    writeFileSync(join(testPaths['pnpm-package'], 'package.json'), packageJsonPnpm)
-    writeFileSync(join(testPaths['yarn-package'], 'package.json'), packageJsonYarn)
+    writeFileSync(
+      join(testPaths['pnpm-package'], 'package.json'),
+      packageJsonPnpm,
+    )
+    writeFileSync(
+      join(testPaths['yarn-package'], 'package.json'),
+      packageJsonYarn,
+    )
   })
 
   afterAll(() => {
@@ -89,8 +99,7 @@ describe('add correct scripts to package.json', () => {
   })
 
   test('check over ride on package manger detection', () => {
-    const result = detectPackageManager(workingDirBase, "yarn")
+    const result = detectPackageManager(workingDirBase, 'yarn')
     expect(result).toBe('yarn')
   })
-
 })
