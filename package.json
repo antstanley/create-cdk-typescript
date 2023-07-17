@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "test": "vitest"
   },
   "bin": {
@@ -49,6 +50,7 @@
   },
   "dependencies": {
     "@types/yargs-parser": "^21.0.0",
+    "strip-json-comments": "^5.0.1",
     "yargs-parser": "^21.1.1"
   }
 }

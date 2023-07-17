@@ -1,4 +1,5 @@
 import { describe, test, beforeAll, afterAll, expect } from 'vitest'
+import { Arguments } from 'yargs-parser'
 import { join } from 'node:path'
 import { existsSync, mkdirSync, rmSync } from 'node:fs'
 import buildConfig from '../lib/buildConfig.js'
@@ -30,13 +31,13 @@ describe('generate config to be used', () => {
   })
 
   test('when option is "yes"', () => {
-    const args = { yes: true }
+    const args: Arguments = { yes: true, "_": [''] }
     const result = buildConfig(args)
     expect(result).toStrictEqual(defaultConfig)
   })
 
   test('when option "root" = "./root"', () => {
-    const args = { root: './root' }
+    const args: Arguments = { root: './root', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ root: join(process.cwd(), './root') }
     }
@@ -46,7 +47,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "root" = "{cwd}/root"', () => {
-    const args = { root: join(process.cwd(), './root') }
+    const args: Arguments = { root: join(process.cwd(), './root'), "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ root: join(process.cwd(), './root') }
     }
@@ -56,7 +57,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "dir" = "./cdk-test"', () => {
-    const args = { dir: './cdk-test' }
+    const args: Arguments = { dir: './cdk-test', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ dir: './cdk-test' }
     }
@@ -66,7 +67,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "test" is not specified', () => {
-    const args = {}
+    const args: Arguments = { "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ test: 'none' }
     }
@@ -76,7 +77,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "test" = "none"', () => {
-    const args = { test: 'none' }
+    const args: Arguments = { test: 'none', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ test: 'none' }
     }
@@ -86,7 +87,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "test" = "jest"', () => {
-    const args = { test: 'jest' }
+    const args: Arguments = { test: 'jest', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ test: 'jest' }
     }
@@ -96,7 +97,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "test" = "vitest"', () => {
-    const args = { test: 'vitest' }
+    const args: Arguments = { test: 'vitest', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ test: 'vitest' }
     }
@@ -106,7 +107,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "packageManager" is not specified', () => {
-    const args = {}
+    const args: Arguments = { "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'auto' }
     }
@@ -116,7 +117,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "packageManager" = "auto"', () => {
-    const args = { packageManager: 'auto' }
+    const args: Arguments = { packageManager: 'auto', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'auto' }
     }
@@ -126,7 +127,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "packageManager" = "npm"', () => {
-    const args = { "package-manager": 'npm' }
+    const args: Arguments = { packageManager: 'npm', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'npm' }
     }
@@ -136,7 +137,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "package-manager" = "yarn"', () => {
-    const args = { 'package-manager': 'yarn' }
+    const args: Arguments = { packageManager: 'yarn', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'yarn' }
     }
@@ -146,7 +147,7 @@ describe('generate config to be used', () => {
   })
 
   test('when option "package-manager" = "pnpm"', () => {
-    const args = { 'package-manager': 'pnpm' }
+    const args: Arguments = { packageManager: 'pnpm', "_": [''] }
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)), ...{ packageManager: 'pnpm' }
     }

@@ -39,11 +39,11 @@ function buildConfig(args: Arguments): Config {
           }
         }
 
-        if (args?.['package-manager']) {
-          if (["npm", "yarn", "pnpm", "auto"].includes(args['package-manager'])) {
-            config.packageManager = args['package-manager']
+        if (args?.packageManager) {
+          if (["npm", "yarn", "pnpm", "auto"].includes(args.packageManager)) {
+            config.packageManager = args.packageManager
           } else {
-            console.warn(`Invalid option for option '-p | --package-manager'. ${args?.['package-manager']} not recognised. Using default ('npm')`)
+            console.warn(`Invalid option for option '-p | --package-manager'. ${args?.packageManager} not recognised. Using default ('npm')`)
           }
         }
       }

@@ -39,7 +39,7 @@ function detect(currentPath: string): string {
   return engine
 }
 
-function detectPackageManager(currentPath: string, packageManager: PackageOptions = 'auto'): string {
+function detectPackageManager(currentPath: string, packageManager: PackageOptions | string = 'auto'): string {
   // default engine is npm, set that upfront. Only try to detect pnpm and yarn.
   let engine: string = 'npm'
   try {

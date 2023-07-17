@@ -1,0 +1,58 @@
+import { spawnSync } from 'node:child_process'
+import addScripts from "./actions/addScripts.js"
+import detectPackageManager from "./actions/detectPackageManager.js"
+import prepareCdkJson from "./actions/prepareCdkJson.js"
+import prepareInstall from "./actions/prepareInstall.js"
+import prepareJest from "./actions/prepareJest.js"
+import prepareTsConfig from "./actions/prepareTsConfig.js"
+import updateRootTsConfig from "./actions/updateRootTsConfig.js"
+
+type Commands = {
+  [index: string]: {
+    method: Function,
+    params: any[],
+    text?: string,
+    result?: string | boolean
+  }
+}
+
+function integrateProject(config: Config): boolean {
+  let result = false
+  try {
+
+    const workingPath = config.root
+    const cdkPath = config.dir
+
+    const commands: Commands = {
+      addScripts: { method: addScripts, params: [workingPath, config.test], text: 'Add deployment script to package.json ...' },
+      prepareInstall: { method: prepareInstall, params: [detectPackageManager(workingPath, config.packageManager), config.test], text: 'Preparing install command ...' },
+      prepareCdkJson: { method: prepareCdkJson, params: [workingPath, cdkPath], text: 'Creating cdk.json file ...' },
+      prepareJest: { method: prepareJest, params: [workingPath, config.test] },
+      prepareTsConfig: { method: prepareTsConfig, params: [workingPath, cdkPath], text: 'Adding CDK specific tsconfig.json ...' },
+      updateRootTsConfig: { method: updateRootTsConfig, params: [workingPath, cdkPath], text: 'Updating root tsconfig.json to exclude CDK scripts ...' }
+    }
+
+    Object.keys(commands).map((commandKey: string) => {
+      const { method, params, text } = commands[commandKey]
+
+      if (text) console.log(text)
+      const commandResult = method(...params)
+      if (commandResult) {
+        commands[commandKey].result = commandResult
+        if (text) console.log(text, 'done')
+      } else {
+        if (text) console.log(text, 'failed')
+      }
+    })
+
+    if (typeof commands.prepareInstall?.result === 'string') {
+      spawnSync(commands.prepareInstall?.result)
+      console.log('Dependencies installed')
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return result
+}
+
+export default integrateProject

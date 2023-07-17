@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+import stripJsonComments from 'strip-json-comments'
 
 type PackageScripts = {
   [index: string]: string
@@ -19,7 +20,8 @@ function addScripts(currentPath: string, testFramework: string): boolean {
 
     const packageJsonPath = join(currentPath, 'package.json')
     if (existsSync(packageJsonPath)) {
-      const packageJson: { scripts?: { [index: string]: string } } = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
+      const packageJsonFile = readFileSync(packageJsonPath, 'utf8')
+      const packageJson: { scripts?: { [index: string]: string } } = JSON.parse(stripJsonComments(packageJsonFile))
 
       if (typeof packageJson.scripts === 'object') {
         packageJson.scripts = Object.assign(packageJson.scripts, newScripts)

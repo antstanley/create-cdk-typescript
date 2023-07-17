@@ -1,5 +1,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+import stripJsonComments from 'strip-json-comments'
+
 
 function updateRootTsConfig(currentPath: string, cdkPath: string): boolean {
   // default engine is npm, set that upfront. Only try to detect pnpm and yarn.
@@ -10,7 +12,8 @@ function updateRootTsConfig(currentPath: string, cdkPath: string): boolean {
 
     const tsConfigJsonPath = join(currentPath, 'tsconfig.json')
     if (existsSync(tsConfigJsonPath)) {
-      const tsConfig: { exclude?: string[] } = JSON.parse(readFileSync(tsConfigJsonPath, 'utf8'))
+      const tsConfigString: string = readFileSync(tsConfigJsonPath, 'utf8')
+      const tsConfig: { exclude?: string[] } = JSON.parse(stripJsonComments(tsConfigString))
 
       if (typeof tsConfig.exclude === 'object') {
         tsConfig.exclude.push(excludeGlob)
