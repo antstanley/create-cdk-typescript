@@ -16,7 +16,7 @@ describe('add cdk.json file referencing correct script location', () => {
   })
 
   afterAll(() => {
-    //if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
+    if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
   })
 
   test('create cdk.json in correct location', () => {
