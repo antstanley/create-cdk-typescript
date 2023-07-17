@@ -15,7 +15,7 @@ describe('add cdk specific tsconfig file in cdk folder', () => {
   })
 
   afterAll(() => {
-    // if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
+    if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
   })
 
   test('create tsconfig.json in correct location with correct config', () => {
