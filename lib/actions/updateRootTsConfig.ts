@@ -16,7 +16,7 @@ function updateRootTsConfig(currentPath: string, cdkPath: string): boolean {
       const tsConfig: { exclude?: string[] } = JSON.parse(stripJsonComments(tsConfigString))
 
       if (typeof tsConfig.exclude === 'object') {
-        tsConfig.exclude.push(excludeGlob)
+        if (!tsConfig.exclude.includes(excludeGlob)) tsConfig.exclude.push(excludeGlob)
       } else {
         tsConfig.exclude = [excludeGlob]
       }

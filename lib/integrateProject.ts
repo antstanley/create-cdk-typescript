@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process'
+import { spawnSync, spawn } from 'node:child_process'
 import addScripts from "./actions/addScripts.js"
 import detectPackageManager from "./actions/detectPackageManager.js"
 import prepareCdkJson from "./actions/prepareCdkJson.js"
@@ -7,12 +7,17 @@ import prepareJest from "./actions/prepareJest.js"
 import prepareTsConfig from "./actions/prepareTsConfig.js"
 import updateRootTsConfig from "./actions/updateRootTsConfig.js"
 
+interface ISpawnInstall {
+  command: string
+  args: string[]
+}
+
 type Commands = {
   [index: string]: {
     method: Function,
     params: any[],
     text?: string,
-    result?: string | boolean
+    result?: string | boolean | ISpawnInstall
   }
 }
 
@@ -45,9 +50,16 @@ function integrateProject(config: Config): boolean {
       }
     })
 
-    if (typeof commands.prepareInstall?.result === 'string') {
-      spawnSync(commands.prepareInstall?.result)
-      console.log('Dependencies installed')
+    if (typeof commands.prepareInstall?.result === 'object') {
+      console.log("Installing dependencies ...")
+      console.log(commands.prepareInstall?.result.command, commands.prepareInstall?.result.args.join(' '))
+      const spawnProcess = spawn(commands.prepareInstall?.result.command, commands.prepareInstall?.result.args)
+      spawnProcess.stdout.on("data", (data) => {
+        console.log(data.toString())
+      })
+      spawnProcess.stdout.on("end", () => {
+        console.log("Installing dependencies ... done")
+      })
     }
   } catch (error) {
     console.error(error)

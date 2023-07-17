@@ -1,32 +1,30 @@
-
-function prepareInstall(engine: string, test: string): string {
-  let installString = ''
+function prepareInstall(command: string, test: string): { command: string, args: string[] } {
+  let args: string[] = []
   try {
-    const packages: string[] = ['aws-cdk@latest', 'aws-cdk-lib@latest', 'typescript@latest', 'ts-node@latest']
+    args = ['aws-cdk@latest', 'aws-cdk-lib@latest', 'typescript@latest', 'ts-node@latest']
 
     if (test === 'vitest') {
-      packages.push('vitest@latest')
+      args.push('vitest@latest')
     } else if (test === 'jest') {
-      packages.push('jest@latest')
-      packages.push('ts-jest@latest')
+      args.push('jest@latest')
+      args.push('ts-jest@latest')
     }
 
-    switch (engine) {
+    switch (command) {
       case 'yarn':
-        installString = 'yarn add -D ' + packages.join(' ')
+        args.unshift('add', '-D')
         break
       case 'pnpm':
-        installString = 'pnpm add -D ' + packages.join(' ')
+        args.unshift('add', '-D')
         break
       default:
-        installString = 'npm install -D ' + packages.join(' ')
+        args.unshift('install', '-D')
         break
     }
   } catch (error) {
     console.warn(error)
   }
-  return installString
-
+  return { command, args }
 }
 
 export default prepareInstall
