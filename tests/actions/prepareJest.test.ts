@@ -28,10 +28,15 @@ describe('add jest config file in root with correct config', () => {
   })
 
   test('create jest.config.js in correct location', () => {
-    const result = prepareJest(workingDirBase)
+    const result = prepareJest(workingDirBase, 'jest')
     expect(result).toBe(true)
     const getJest = readFileSync(join(workingDirBase, 'jest.config.js'), 'utf8')
     expect(getJest).toBe(expectedString)
+  })
+
+  test('do nothing if "jest" is not specified as the test framework', () => {
+    const result = prepareJest(workingDirBase)
+    expect(result).toBe(false)
   })
 
 })

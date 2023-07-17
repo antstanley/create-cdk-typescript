@@ -12,11 +12,16 @@ module.exports = {
 };
 `
 
-function prepareJest(currentPath: string): boolean {
+function prepareJest(currentPath: string, testFramework?: string): boolean {
   let result = false
   try {
-    writeFileSync(join(currentPath, 'jest.config.js'), cdkJest)
-    result = true
+    if (testFramework) {
+      if (testFramework === 'jest') {
+        writeFileSync(join(currentPath, 'jest.config.js'), cdkJest)
+        result = true
+      }
+    }
+
   } catch (error) {
     console.warn(error)
   }
