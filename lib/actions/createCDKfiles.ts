@@ -1,14 +1,11 @@
 import { join } from 'node:path'
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs'
-
-function upperFirst(stringName: string) {
-  return stringName.slice(0, 1).toUpperCase() + stringName.slice(1, stringName.length);
-}
+import { pascalCase, camelCase } from "change-case"
 
 function createCDKFiles(currentPath: string, cdkPath: string, name: string): boolean {
 
-  const className = upperFirst(name)
-  const stackFileName = `${name}Stack`
+  const className = pascalCase(name)
+  const stackFileName = camelCase(`${name}Stack`)
 
   const stackFile = `
 import * as cdk from 'aws-cdk-lib';
@@ -22,7 +19,7 @@ export class ${className} extends cdk.Stack {
     // The code that defines your stack goes here
 
     // example resource
-    // const queue = new sqs.Queue(this, 'TmpQueue', {
+    // const queue = new sqs.Queue(this, '${pascalCase(name)}Queue', {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
   }
