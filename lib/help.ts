@@ -18,8 +18,6 @@ const help = `
                                           files to. Defaults to "./cdk"
   -t, --test <vitest|jest|none>           Which test framework to include.
                                           Default  is none.
-  -e, --esm                               Set CDK up to use ES modules. By
-                                          default CDK transpiles to CommonJS.
   -p, --package-manager <npm|yarn|pnpm|auto>
                                           Explicitely specify the package
                                           manager to use when installing
@@ -27,7 +25,6 @@ const help = `
                                           yarn, pnpm and auto detect. Defaults
                                           to auto. If unable to detect any, will
                                           use npm.
-  -o, --override                          Override existing CDK configuration
   -y, --yes                               Run using all the default settings.
   -h, --help                              Show this help message
 
