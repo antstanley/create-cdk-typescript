@@ -13,7 +13,7 @@ const workingDirBase = join(process.cwd(), 'prepare-cdkjson')
 
 const cdkPath = './cdk'
 const expectedCommand =
-  'npx ts-node --project ./cdk/tsconfig.json  --prefer-ts-exts ./cdk/index.ts'
+  'npx ts-node --project ./cdk/tsconfig.json  --prefer-ts-exts ./cdk/cdk.ts'
 
 describe('add cdk.json file referencing correct script location', () => {
   beforeAll(() => {

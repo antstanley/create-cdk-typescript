@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, rmSync } from 'node:fs'
 import buildConfig from '../lib/buildConfig.js'
 
 const defaultConfig: Config = {
+  name: process.cwd().replace(/\/$/, "").split("/").pop(),
   root: process.cwd(),
   dir: './cdk',
   test: 'none',
@@ -160,6 +161,17 @@ describe('generate config to be used', () => {
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
       ...{ packageManager: 'pnpm' },
+    }
+
+    const result = buildConfig(args)
+    expect(result).toStrictEqual(expectedConfig)
+  })
+
+  test('when option "name" = "test-project"', () => {
+    const args: Arguments = { name: 'test-project', _: [''] }
+    const expectedConfig = {
+      ...JSON.parse(JSON.stringify(defaultConfig)),
+      ...{ name: 'test-project' },
     }
 
     const result = buildConfig(args)

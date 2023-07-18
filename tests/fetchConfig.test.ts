@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import fetchConfig from '../lib/fetchConfig.js'
 
 const defaultConfig: Config = {
+  name: process.cwd().replace(/\/$/, "").split("/").pop(),
   root: process.cwd(),
   dir: './cdk',
   test: 'none',
