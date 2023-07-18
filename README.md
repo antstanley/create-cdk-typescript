@@ -156,7 +156,8 @@ The default CDK App bootstrap creates multiple files and folders, many of which 
     - `jest@latest ts-jest@latest` if Jest is selected
     - Add a `jest.config.json` file to the project root if `jest` is selected
 
+
 ## Roadmap
 
-[] Add clean install into a new project
-[] Add interactive install options
+- [ ] Add clean install into a new project
+- [ ] Add interactive install options
