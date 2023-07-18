@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "publish": "npx lint-staged && npm test && npm run build && npm pubish",
+    "publish": "npx lint-staged && vitest run && npm run build && npm publish",
     "test": "vitest"
   },
   "bin": {
