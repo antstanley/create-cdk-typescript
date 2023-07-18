@@ -4,6 +4,7 @@ import fetchConfig from './fetchConfig.js'
 
 function buildConfig(args: Arguments): Config {
   let config: Config = {
+    name: process.cwd().replace(/\/$/, "").split("/").pop(),
     root: process.cwd(),
     dir: './cdk',
     test: 'none',
@@ -23,6 +24,10 @@ function buildConfig(args: Arguments): Config {
           } else {
             config.root = join(process.cwd(), args.root)
           }
+        }
+
+        if (args.name) {
+          config.name = args.name
         }
 
         if (args.dir) {

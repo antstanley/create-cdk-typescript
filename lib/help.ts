@@ -11,6 +11,8 @@ const help = `
 
   -c, --config <filename>                 Use a config file instead of CLI
                                           options
+  -n, --name <string>                     CDK project name, will default to
+                                          project root directory name
   -r, --root <dirname>                    The root directory of the project you
                                           want to configure CDK for. Defaults
                                           to the current working directory.

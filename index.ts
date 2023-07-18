@@ -9,7 +9,7 @@ function cli(): void {
     alias: commandAliases,
     configuration: { 'camel-case-expansion': true },
     boolean: ['y'],
-    string: ['c', 'r', 'd', 't', 'p'],
+    string: ['c', 'n', 'r', 'd', 't', 'p'],
     normalize: ['c'],
   })
 

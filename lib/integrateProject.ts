@@ -1,4 +1,4 @@
-import { spawnSync, spawn } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import addScripts from './actions/addScripts.js'
 import detectPackageManager from './actions/detectPackageManager.js'
 import prepareCdkJson from './actions/prepareCdkJson.js'
@@ -6,6 +6,7 @@ import prepareInstall from './actions/prepareInstall.js'
 import prepareJest from './actions/prepareJest.js'
 import prepareTsConfig from './actions/prepareTsConfig.js'
 import updateRootTsConfig from './actions/updateRootTsConfig.js'
+import createCDKFiles from './actions/createCDKfiles.js'
 
 interface ISpawnInstall {
   command: string
@@ -56,6 +57,11 @@ function integrateProject(config: Config): boolean {
         method: updateRootTsConfig,
         params: [workingPath, cdkPath],
         text: 'Updating root tsconfig.json to exclude CDK scripts ...',
+      },
+      createCDKFiles: {
+        method: createCDKFiles,
+        params: [workingPath, cdkPath, config.name],
+        text: `Creating CDK files in ${cdkPath} ...`,
       },
     }
 

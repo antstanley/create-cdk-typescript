@@ -2,6 +2,7 @@ import { isAbsolute, join } from 'node:path'
 import { readFileSync, existsSync } from 'node:fs'
 
 const defaultConfig: Config = {
+  name: process.cwd().replace(/\/$/, "").split("/").pop(),
   root: process.cwd(),
   dir: './cdk',
   test: 'none',
@@ -18,6 +19,7 @@ function validateConfig(configString: string): Config {
   }
 
   // if missing config option, use default config option
+  if (!config.name) config.name = defaultConfig.name
   if (!config.root) config.root = defaultConfig.root
   if (!config.dir) config.dir = defaultConfig.dir
   if (!config.test) config.test = defaultConfig.test

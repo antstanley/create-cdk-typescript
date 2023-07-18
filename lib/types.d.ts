@@ -12,6 +12,7 @@ enum PackageOptions {
 }
 
 type Config = {
+  name?: string
   root: string
   dir: string
   test: TestOptions | string
