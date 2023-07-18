@@ -7,6 +7,7 @@ import prepareJest from './actions/prepareJest.js'
 import prepareTsConfig from './actions/prepareTsConfig.js'
 import updateRootTsConfig from './actions/updateRootTsConfig.js'
 import createCDKFiles from './actions/createCDKfiles.js'
+import updateGitNpmIgnore from './actions/updateGitNpmIgnore.js'
 
 interface ISpawnInstall {
   command: string
@@ -57,6 +58,11 @@ function integrateProject(config: Config): boolean {
         method: updateRootTsConfig,
         params: [workingPath, cdkPath],
         text: 'Updating root tsconfig.json to exclude CDK scripts ...',
+      },
+      updateGitNpmIgnore: {
+        method: updateGitNpmIgnore,
+        params: [workingPath],
+        text: 'Updating root .gitignore and .npmignore fields to exclude CDK outputs ...',
       },
       createCDKFiles: {
         method: createCDKFiles,

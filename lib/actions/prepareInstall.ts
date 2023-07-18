@@ -7,7 +7,7 @@ function prepareInstall(
     args = [
       'aws-cdk@latest',
       'aws-cdk-lib@latest',
-      'constructs',
+      'constructs@latest',
       'typescript@latest',
       'ts-node@latest',
     ]
