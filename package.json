@@ -1,6 +1,6 @@
 {
   "name": "create-cdkts",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Command Line utility to bootstrap a TypeScript CDK project",
   "main": "dist/index.js",
   "type": "module",
