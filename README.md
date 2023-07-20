@@ -17,13 +17,13 @@ npx create-cdkts --yes
 #### yarn
 
 ```sh
-yarn create cdkts
+yarn create cdkts --yes
 ```
 
 #### pnpm
 
 ```sh
-pnpm create cdkts
+pnpm create cdkts --yes
 ````
 
 This will install the minimal required dependencies, with a minimal configuration into your existing project. It will
@@ -60,6 +60,8 @@ This will install the minimal required dependencies, with a minimal configuratio
 
  -c, --config <filename>                 Use a config file instead of CLI
                                          options
+ -n, --name <string>                     CDK project name, will default to
+                                         project root directory name
  -r, --root <dirname>                    The root directory of the project you
                                          want to configure CDK for. Defaults
                                          to the current working directory.
@@ -113,7 +115,9 @@ The `npm init -y` command will bootstrap a new empty project that you can instal
 
 ## Why
 
-Why create a new bootstrap for CDK projects? CDK has it's own bootstrap command, but it's limited. `create-cdkts` allows you to integrate CDK into an existing projects easily in a more flexible way. This is ideal when wanting to migrate to CDK, or use CDK to deploy the infrasturcture for modern web frameworks.
+Why create a new bootstrap for CDK projects? CDK has it's own bootstrap command, but it's limited.
+
+`create-cdkts` allows you to integrate CDK into an existing project easily in a more flexible way. This is ideal when wanting to migrate to CDK, or use CDK to deploy the infrastructure for modern web frameworks.
 
 
 ### Optional test framework.
@@ -149,13 +153,14 @@ The default CDK App bootstrap creates multiple files and folders, many of which 
 
 - Add a script called `deploy` with the value `cdk deploy -all` to your `package.json` so you can type `npm run deploy` to trigger a CDK deploy.
 
-- Install the following base development dependencies using the package manager already in use in the project. `aws-cdk@latest aws-cdk-lib@latest typescript@latest ts-node@latest`
+- Install the following base development dependencies using the package manager already in use in the project. `aws-cdk@latest aws-cdk-lib@latest typescript@latest constructs@latest ts-node@latest`
 
 - Depending on test framework it will install either
     - `vitest@latest` if Vitest is selected
     - `jest@latest ts-jest@latest` if Jest is selected
     - Add a `jest.config.json` file to the project root if `jest` is selected
 
+- Update .gitignore and .npmignore in the root of your project to exclude CDK working directories
 
 ## Roadmap
 
