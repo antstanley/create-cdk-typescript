@@ -1,6 +1,15 @@
 # create-cdkts
 
-Bootstrap a Typescript CDK configuration into an existing project, or a new project!
+Bootstrap a Typescript CDK configuration with modern tooling into an existing project, or a new project!
+
+Includes modern tools and configuration including:
+
+`tsx` - *TypeScript Execute* - Easiest way to run TypeScript in Node.js [https://tsx.is/](https://tsx.is/)
+`biome` - *Biome* - Rust based formatting tooling [https://biomejs.dev/]
+`oxlint` - *OXC Linter* - Rust based linter with
+`lefthook` - *Lefthook* - Rust based Git hooks manager [https://github.com/evilmartians/lefthook]
+
+Using Rust based tooling with first class TypeScript support providing performance, compatibility and overall a better developer experience.
 
 ## How
 
@@ -34,7 +43,7 @@ This will install the minimal required dependencies, with a minimal configuratio
  - add an `exclude` rule for your CDK files in the project root `tsconfig.json` if it exists.
  - Install the minimal required dependencies
 
- The default configuration will not install a test framework, but you can optionally install one if needed.
+ The default configuration will install `vitest`, `oxlint`, `lefthook`, `biome` and `tsx` frameworks, but you can optionally only install what you need.
 
  ### Help
 
@@ -76,6 +85,9 @@ This will install the minimal required dependencies, with a minimal configuratio
                                          yarn, pnpm and auto detect. Defaults
                                          to auto. If unable to detect any, will
                                          use npm.
+ -ox, --oxlint <Yes|no>                  Use Oxlint for linting. Default: Yes
+ -b, --biome <Yes|no>                    Use Biome for formatting. Default: Yes
+ -l, --lefthook <Yes|no>                 Use Lefthook for Git hooks. Default: Yes
  -y, --yes                               Run using all the default settings.
  -h, --help                              Show this help message
 

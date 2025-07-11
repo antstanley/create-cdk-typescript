@@ -1,13 +1,16 @@
 import { join } from 'node:path'
 import { writeFileSync, existsSync, mkdirSync } from 'node:fs'
-import { pascalCase, camelCase } from "change-case"
+import { pascalCase, camelCase } from 'change-case'
 
-function createCDKFiles(currentPath: string, cdkPath: string, name: string): boolean {
+function createCDKFiles(
+	currentPath: string,
+	cdkPath: string,
+	name: string
+): boolean {
+	const className = pascalCase(name)
+	const stackFileName = camelCase(`${name}Stack`)
 
-  const className = pascalCase(name)
-  const stackFileName = camelCase(`${name}Stack`)
-
-  const stackFile = `
+	const stackFile = `
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
@@ -25,7 +28,7 @@ export class ${className} extends cdk.Stack {
   }
 }`
 
-  const appFile = `
+	const appFile = `
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { ${className} } from './${stackFileName}';
@@ -48,25 +51,19 @@ new ${className}(app, '${name}', {
 });
 `
 
-  let result = false
-  try {
-    const fullCdkPath = join(currentPath, cdkPath)
-    if (!existsSync(fullCdkPath)) mkdirSync(fullCdkPath, { recursive: true })
+	let result = false
+	try {
+		const fullCdkPath = join(currentPath, cdkPath)
+		if (!existsSync(fullCdkPath)) mkdirSync(fullCdkPath, { recursive: true })
 
-    writeFileSync(
-      join(fullCdkPath, `${stackFileName}.ts`),
-      stackFile, 'utf8'
-    )
+		writeFileSync(join(fullCdkPath, `${stackFileName}.ts`), stackFile, 'utf8')
 
-    writeFileSync(
-      join(fullCdkPath, `cdk.ts`),
-      appFile, 'utf8'
-    )
-    result = true
-  } catch (error) {
-    console.warn(error)
-  }
-  return result
+		writeFileSync(join(fullCdkPath, `cdk.ts`), appFile, 'utf8')
+		result = true
+	} catch (error) {
+		console.warn(error)
+	}
+	return result
 }
 
 export default createCDKFiles

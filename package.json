@@ -7,7 +7,9 @@
   "scripts": {
     "build": "tsc",
     "publish": "npx lint-staged && vitest run && npm run build && npm publish",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "oxlint .",
+    "format": "npx @biomejs/biome format --write ."
   },
   "bin": {
     "create-cdkts": "./bin/create-cdkts.js"
@@ -31,31 +33,19 @@
   },
   "homepage": "https://github.com/antstanley/create-cdk-typescript#readme",
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-config-standard-with-typescript": "^36.1.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^16.0.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^3.0.0",
-    "typescript": "^5.1.6",
-    "vitest": "^0.33.0"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "prettier --write .",
-      "eslint"
-    ]
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@types/yargs-parser": "^21.0.0",
-    "change-case": "^4.1.2",
-    "strip-json-comments": "^5.0.1",
-    "yargs-parser": "^21.1.1"
+    "@biomejs/biome": "^2.1.1",
+    "@types/yargs-parser": "^21.0.3",
+    "change-case": "^5.4.4",
+    "lefthook": "^1.12.1",
+    "oxlint": "^1.6.0",
+    "strip-json-comments": "^5.0.2",
+    "tsx": "^4.20.3",
+    "yargs-parser": "^22.0.0"
   }
 }

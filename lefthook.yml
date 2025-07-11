@@ -1,0 +1,20 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
+#
+
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: "*.{js,ts,mjs,mts,json,svelte}"
+      run: npx oxlint {staged_files}
+    lint:
+      glob: "*.{js,ts,mjs,mts,json,svelte}"
+      run: npx @biomejs/biome format --write {staged_files}
+
+commit-msg:
+  commands:
+    "lint commit message":
+      run: npx --no -- commitlint --edit "$1"

@@ -1,10 +1,10 @@
 import { describe, test, beforeAll, afterAll, expect } from 'vitest'
 import {
-  mkdirSync,
-  rmSync,
-  existsSync,
-  writeFileSync,
-  readFileSync,
+	mkdirSync,
+	rmSync,
+	existsSync,
+	writeFileSync,
+	readFileSync
 } from 'node:fs'
 import { join } from 'node:path'
 import prepareJest from '../../lib/actions/prepareJest.js'
@@ -23,24 +23,24 @@ module.exports = {
 `
 
 describe('add jest config file in root with correct config', () => {
-  beforeAll(() => {
-    if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
-    mkdirSync(workingDirBase, { recursive: true })
-  })
+	beforeAll(() => {
+		if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
+		mkdirSync(workingDirBase, { recursive: true })
+	})
 
-  afterAll(() => {
-    if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
-  })
+	afterAll(() => {
+		if (existsSync(workingDirBase)) rmSync(workingDirBase, { recursive: true })
+	})
 
-  test('create jest.config.js in correct location', () => {
-    const result = prepareJest(workingDirBase, 'jest')
-    expect(result).toBe(true)
-    const getJest = readFileSync(join(workingDirBase, 'jest.config.js'), 'utf8')
-    expect(getJest).toBe(expectedString)
-  })
+	test('create jest.config.js in correct location', () => {
+		const result = prepareJest(workingDirBase, 'jest')
+		expect(result).toBe(true)
+		const getJest = readFileSync(join(workingDirBase, 'jest.config.js'), 'utf8')
+		expect(getJest).toBe(expectedString)
+	})
 
-  test('do nothing if "jest" is not specified as the test framework', () => {
-    const result = prepareJest(workingDirBase)
-    expect(result).toBe(false)
-  })
+	test('do nothing if "jest" is not specified as the test framework', () => {
+		const result = prepareJest(workingDirBase)
+		expect(result).toBe(false)
+	})
 })
