@@ -8,6 +8,7 @@ import prepareTsConfig from './actions/prepareTsConfig.js'
 import updateRootTsConfig from './actions/updateRootTsConfig.js'
 import createCDKFiles from './actions/createCDKfiles.js'
 import updateGitNpmIgnore from './actions/updateGitNpmIgnore.js'
+import type { Config } from './types.js'
 
 interface ISpawnInstall {
   command: string

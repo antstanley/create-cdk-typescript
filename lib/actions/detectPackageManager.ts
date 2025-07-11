@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+import type { PackageOptions } from '../types.js'
 
 function detectEngineByFile(contents: string[], fileNames: string[]): boolean {
   const intersection = fileNames.filter((fileName) =>
@@ -8,7 +9,12 @@ function detectEngineByFile(contents: string[], fileNames: string[]): boolean {
   return intersection.length > 0
 }
 
+/**
+ * Detect the package manager an existing project may use.
+ * Check for pnpm first, then yarn, and if neither detected assume npm.
+ */
 function detect(currentPath: string): string {
+  // set default engine detection to npm
   let engine: string = 'npm'
   try {
     const dirContents = readdirSync(currentPath, 'utf8')

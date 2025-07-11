@@ -2,9 +2,10 @@ import { describe, test, beforeAll, afterAll, expect } from 'vitest'
 import { join } from 'node:path'
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import fetchConfig from '../lib/fetchConfig.js'
+import type { Config } from '../lib/types.js'
 
 const defaultConfig: Config = {
-  name: process.cwd().replace(/\/$/, "").split("/").pop(),
+  name: process.cwd().replace(/\/$/, '').split('/').pop(),
   root: process.cwd(),
   dir: './cdk',
   test: 'none',
