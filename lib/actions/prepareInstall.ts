@@ -10,6 +10,9 @@ function prepareInstall(
       'constructs@latest',
       'typescript@latest',
       'tsx@latest',
+      '@biomejs/biome@latest',
+      'oxlint',
+      'lefthook',
     ]
 
     if (test === 'vitest') {
