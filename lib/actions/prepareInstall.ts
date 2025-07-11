@@ -9,7 +9,7 @@ function prepareInstall(
       'aws-cdk-lib@latest',
       'constructs@latest',
       'typescript@latest',
-      'ts-node@latest',
+      'tsx@latest',
     ]
 
     if (test === 'vitest') {

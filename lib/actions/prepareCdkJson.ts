@@ -5,7 +5,7 @@ function prepareCdkJson(currentPath: string, cdkPath: string): boolean {
   let result = false
   try {
     const cdkJson = {
-      app: `npx ts-node --project ${cdkPath}/tsconfig.json  --prefer-ts-exts ${cdkPath}/cdk.ts`,
+      app: `npx tsx ${cdkPath}/cdk.ts`,
       watch: {
         include: ['**'],
         exclude: [
