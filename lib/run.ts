@@ -1,8 +1,8 @@
-import buildConfig from './buildConfig.js'
-import detectProject from './actions/detectProject.js'
-import newProject from './newProject.js'
-import integrateProject from './integrateProject.js'
 import type { Arguments } from 'yargs-parser'
+import detectProject from './actions/detectProject.js'
+import buildConfig from './buildConfig.js'
+import integrateProject from './integrateProject.js'
+import newProject from './newProject.js'
 
 function run(args: Arguments): boolean {
 	let result = false

@@ -1,5 +1,5 @@
-import type { Arguments } from 'yargs-parser'
 import { isAbsolute, join } from 'node:path'
+import type { Arguments } from 'yargs-parser'
 import fetchConfig from './fetchConfig.js'
 
 function buildConfig(args: Arguments): Config {

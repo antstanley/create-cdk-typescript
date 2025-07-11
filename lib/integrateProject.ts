@@ -1,13 +1,13 @@
 import { spawn } from 'node:child_process'
 import addScripts from './actions/addScripts.js'
+import createCDKFiles from './actions/createCDKfiles.js'
 import detectPackageManager from './actions/detectPackageManager.js'
 import prepareCdkJson from './actions/prepareCdkJson.js'
 import prepareInstall from './actions/prepareInstall.js'
 import prepareJest from './actions/prepareJest.js'
 import prepareTsConfig from './actions/prepareTsConfig.js'
-import updateRootTsConfig from './actions/updateRootTsConfig.js'
-import createCDKFiles from './actions/createCDKfiles.js'
 import updateGitNpmIgnore from './actions/updateGitNpmIgnore.js'
+import updateRootTsConfig from './actions/updateRootTsConfig.js'
 
 interface ISpawnInstall {
 	command: string

@@ -1,4 +1,4 @@
-import { writeFileSync, existsSync } from 'node:fs'
+import { existsSync, writeFileSync } from 'node:fs'
 
 /**
  * For new projects create a basic package.json file in the root directory with the project name

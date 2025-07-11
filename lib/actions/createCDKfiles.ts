@@ -1,6 +1,6 @@
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { writeFileSync, existsSync, mkdirSync } from 'node:fs'
-import { pascalCase, camelCase } from 'change-case'
+import { camelCase, pascalCase } from 'change-case'
 
 function createCDKFiles(
 	currentPath: string,

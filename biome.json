@@ -5,8 +5,7 @@
 		"indentStyle": "tab",
 		"indentWidth": 2,
 		"lineWidth": 80,
-		"lineEnding": "lf",
-		"includes": ["!cdk.out", "!dist", "!node_modules"]
+		"lineEnding": "lf"
 	},
 	"javascript": {
 		"formatter": {

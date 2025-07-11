@@ -1,5 +1,5 @@
-import { join } from 'node:path'
 import { writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 
 const cdkJest = `
 module.exports = {

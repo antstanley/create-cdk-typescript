@@ -1,5 +1,5 @@
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { writeFileSync, existsSync, mkdirSync } from 'node:fs'
 
 const cdkTsConfig = {
 	compilerOptions: {
