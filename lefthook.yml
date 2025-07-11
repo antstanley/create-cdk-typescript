@@ -7,12 +7,12 @@
 pre-commit:
   parallel: true
   commands:
-    format:
-      glob: "*.{js,ts,mjs,mts,json,svelte}"
-      run: npx oxlint {staged_files}
     lint:
       glob: "*.{js,ts,mjs,mts,json,svelte}"
-      run: npx @biomejs/biome format --write {staged_files}
+      run: npx oxlint {staged_files}
+    format:
+      glob: "*.{js,ts,mjs,mts,json,svelte}"
+      run: npx @biomejs/biome format --write {staged_files} && npx @biomejs/biome check --write {staged_files}
 
 commit-msg:
   commands:
