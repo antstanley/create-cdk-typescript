@@ -42,7 +42,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { root: "./root", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ root: join(process.cwd(), "./root") },
+      root: join(process.cwd(), "./root"),
     };
 
     const result = buildConfig(args);
@@ -53,7 +53,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { root: join(process.cwd(), "./root"), _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ root: join(process.cwd(), "./root") },
+      root: join(process.cwd(), "./root"),
     };
 
     const result = buildConfig(args);
@@ -64,7 +64,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { dir: "./cdk-test", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ dir: "./cdk-test" },
+      dir: "./cdk-test",
     };
 
     const result = buildConfig(args);
@@ -75,7 +75,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ test: "none" },
+      test: "none",
     };
 
     const result = buildConfig(args);
@@ -86,7 +86,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { test: "none", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ test: "none" },
+      test: "none",
     };
 
     const result = buildConfig(args);
@@ -97,7 +97,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { test: "jest", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ test: "jest" },
+      test: "jest",
     };
 
     const result = buildConfig(args);
@@ -108,7 +108,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { test: "vitest", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ test: "vitest" },
+      test: "vitest",
     };
 
     const result = buildConfig(args);
@@ -119,7 +119,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ packageManager: "auto" },
+      packageManager: "auto",
     };
 
     const result = buildConfig(args);
@@ -130,7 +130,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { packageManager: "auto", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ packageManager: "auto" },
+      packageManager: "auto",
     };
 
     const result = buildConfig(args);
@@ -141,7 +141,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { packageManager: "npm", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ packageManager: "npm" },
+      packageManager: "npm",
     };
 
     const result = buildConfig(args);
@@ -152,7 +152,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { packageManager: "yarn", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ packageManager: "yarn" },
+      packageManager: "yarn",
     };
 
     const result = buildConfig(args);
@@ -163,7 +163,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { packageManager: "pnpm", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ packageManager: "pnpm" },
+      packageManager: "pnpm",
     };
 
     const result = buildConfig(args);
@@ -174,7 +174,7 @@ describe("generate config to be used", () => {
     const args: Arguments = { name: "test-project", _: [""] };
     const expectedConfig = {
       ...JSON.parse(JSON.stringify(defaultConfig)),
-      ...{ name: "test-project" },
+      name: "test-project",
     };
 
     const result = buildConfig(args);

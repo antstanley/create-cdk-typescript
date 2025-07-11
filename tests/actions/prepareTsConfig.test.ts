@@ -1,6 +1,6 @@
-import { describe, test, beforeAll, afterAll, expect } from "vitest";
-import { mkdirSync, rmSync, existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
+import { afterAll, beforeAll, describe, expect, test } from "vitest";
 import prepareTsConfig from "../../lib/actions/prepareTsConfig.js";
 
 const workingDirBase = join(process.cwd(), "prepare-cdktsconfig");
