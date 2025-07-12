@@ -1,44 +1,42 @@
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 
-const cdkTsConfig = {
-	compilerOptions: {
-		target: 'ES2020',
-		module: 'commonjs',
-		lib: ['es2020'],
-		declaration: true,
-		strict: true,
-		noImplicitAny: true,
-		strictNullChecks: true,
-		noImplicitThis: true,
-		alwaysStrict: true,
-		noUnusedLocals: false,
-		noUnusedParameters: false,
-		noImplicitReturns: true,
-		noFallthroughCasesInSwitch: false,
-		inlineSourceMap: true,
-		inlineSources: true,
-		experimentalDecorators: true,
-		strictPropertyInitialization: false,
-		typeRoots: ['./node_modules/@types']
-	},
-	exclude: ['node_modules', 'cdk.out']
+const minimalTsConfig = {
+  compilerOptions: {
+    incremental: true,
+    target: "ES2022",
+    module: "NodeNext",
+    moduleResolution: "nodenext",
+    declaration: true,
+    outDir: "./build",
+    esModuleInterop: true,
+    forceConsistentCasingInFileNames: true,
+    strict: true,
+    typeRoots: ["./node_modules/@types"],
+  },
+  exclude: ["node_modules", "cdk.out"],
+};
+
+function prepareTsConfig(currentPath: string): boolean {
+  let result = false;
+  try {
+    if (!existsSync(currentPath)) mkdirSync(currentPath, { recursive: true });
+    const tsConfigLocation = join(currentPath, "tsconfig.json");
+
+    if (!existsSync(tsConfigLocation)) {
+      writeFileSync(tsConfigLocation, JSON.stringify(minimalTsConfig, null, 2));
+      result = true;
+    } else {
+      const existingTsConfigFile = readFileSync(tsConfigLocation, "utf8");
+      const existingTsConfig = JSON.parse(existingTsConfigFile);
+      const mergedTsConfig = { ...existingTsConfig, ...minimalTsConfig };
+      writeFileSync(tsConfigLocation, JSON.stringify(mergedTsConfig, null, 2));
+      result = true;
+    }
+  } catch (error) {
+    console.warn(error);
+  }
+  return result;
 }
 
-function prepareTsConfig(currentPath: string, cdkPath: string): boolean {
-	let result = false
-	try {
-		const fullCdkPath = join(currentPath, cdkPath)
-		if (!existsSync(fullCdkPath)) mkdirSync(fullCdkPath, { recursive: true })
-		writeFileSync(
-			join(fullCdkPath, 'tsconfig.json'),
-			JSON.stringify(cdkTsConfig, null, 2)
-		)
-		result = true
-	} catch (error) {
-		console.warn(error)
-	}
-	return result
-}
-
-export default prepareTsConfig
+export default prepareTsConfig;

@@ -46,6 +46,7 @@
 		"oxlint": "^1.6.0",
 		"strip-json-comments": "^5.0.2",
 		"tsx": "^4.20.3",
+		"yaml": "^2.8.0",
 		"yargs-parser": "^22.0.0"
 	}
 }
