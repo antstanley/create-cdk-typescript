@@ -125,7 +125,7 @@ function integrateProject(config: Config): boolean {
 				if (commandResult) {
 					commands[key].result = commandResult
 					if (text) console.log(text, 'done')
-					if ((key = 'prepareInstall')) {
+					if (key === 'prepareInstall') {
 						installCommand.command = commandResult.command
 						installCommand.args = commandResult.args
 					}
