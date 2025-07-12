@@ -6,7 +6,7 @@ type PackageScripts = {
 	[index: string]: string
 }
 
-function addScripts(currentPath: string, testFramework: string): boolean {
+function addScripts(currentPath: string, config: Config): boolean {
 	// default engine is npm, set that upfront. Only try to detect pnpm and yarn.
 	let result = false
 	try {
@@ -14,8 +14,19 @@ function addScripts(currentPath: string, testFramework: string): boolean {
 			deploy: 'cdk deploy --all'
 		}
 
-		if (testFramework !== 'none') {
-			newScripts['test'] = testFramework
+		if (['none', 'jest', 'vitest'].includes(config.test)) {
+			if (config.test !== 'none') {
+				newScripts['test'] = config.test
+			}
+		}
+
+		if (config.biome) {
+			newScripts['format'] =
+				'npx @biomejs/biome format --write . && npx @biomejs/biome check --write .'
+		}
+
+		if (config.oxlint) {
+			newScripts['lint'] = 'npx oxlint'
 		}
 
 		const packageJsonPath = join(currentPath, 'package.json')

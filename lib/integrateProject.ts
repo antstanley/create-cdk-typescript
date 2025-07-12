@@ -37,7 +37,7 @@ function integrateProject(config: Config): boolean {
 		const commands: Commands = {
 			addScripts: {
 				method: addScripts,
-				params: [workingPath, config.test],
+				params: [workingPath, config],
 				text: 'Add deployment script to package.json ...'
 			},
 			prepareInstall: {
