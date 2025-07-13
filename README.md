@@ -5,9 +5,9 @@ Bootstrap a Typescript CDK configuration with modern tooling into an existing pr
 Includes modern tools and configuration including:
 
 `tsx` - *TypeScript Execute* - Easiest way to run TypeScript in Node.js [https://tsx.is/](https://tsx.is/)
-`biome` - *Biome* - Rust based formatting tooling [https://biomejs.dev/]
-`oxlint` - *OXC Linter* - Rust based linter with
-`lefthook` - *Lefthook* - Rust based Git hooks manager [https://github.com/evilmartians/lefthook]
+`biome` - *Biome* - Rust based formatting tooling [https://biomejs.dev/](https://biomejs.dev/)
+`oxlint` - *OXC Linter* - Rust based linter with eslint compatibility [https://oxc.rs](https://oxc.rs)
+`lefthook` - *Lefthook* - Rust based Git hooks manager [https://github.com/evilmartians/lefthook](https://github.com/evilmartians/lefthook)
 
 Using Rust based tooling with first class TypeScript support providing performance, compatibility and overall a better developer experience.
 
@@ -37,11 +37,13 @@ pnpm create cdkts --yes
 
 This will install the minimal required dependencies, with a minimal configuration into your existing project. It will
  - add your CDK files to the a directory called `cdk/`
- - add a CDK specific `tsconfig.json` to the `cdk/` directory
+ - add a `tsconfig.json` to your project root that works with CDK.
  - create a `cdk.json` file in your project root
  - add a `deploy` script to your `package.json`
- - add an `exclude` rule for your CDK files in the project root `tsconfig.json` if it exists.
- - Install the minimal required dependencies
+ - Add [Vitest](https://vitest.dev/) as a test runner and a `test` script to run it
+ - Add [Biome](https://biomejs.dev/) for formatting and a `format` script to run it
+ - Add [OXC linter (oxlint)](https://oxc.rs/docs/guide/usage/linter.html) for linting and a `lint` script to run it
+ - Add [Lefthook](https://github.com/evilmartians/lefthook) for Git hooks management, and install a `pre-commit` hook with `lint` and `format` commands
 
  The default configuration will install `vitest`, `oxlint`, `lefthook`, `biome` and `tsx` frameworks, but you can optionally only install what you need.
 
@@ -100,7 +102,7 @@ This will install the minimal required dependencies, with a minimal configuratio
  Notes:
 
  * If the root directory specified already has a package.json file it will
-   intergrate with the existing project and add config into package.json
+   integrate with the existing project and add config into package.json
 
  * If it detects that there is an existing CDK configuration it will abort
    installation. This behaviour can be toggled with the --overide option
@@ -141,12 +143,6 @@ Options are `vitest`, `jest` or `none`. If your project is already using a test 
 
 It can detect which package manager is being used, and install dependencies using your preferred package manager. It has support for `npm`, `yarn` and `pnpm`
 
-
-### Isolated TypeScript configuration
-
-It creates it's own `tsconfig.json` file specifically for CDK. Integrating CDK with other frameworks, especially web frameworks, which have their own TypeScript config can cause conflicts between the two configurations. `create-cdkts` makes it easier to isolate CDK's TypeScript config from the rest of your project.
-
-
 ### Smaller footprint
 
 The default CDK App bootstrap creates multiple files and folders, many of which are unnecessary. `create-cdkts` has a smaller footprint that makes it easy to add and remove it from an existing project.
@@ -155,7 +151,6 @@ The default CDK App bootstrap creates multiple files and folders, many of which 
 ### What it does
 
 - Creates a single directory with default name `cdk/`, that you can change,  containing
-    - `tsconfig.json` with CDK specific settings
     - `cdk.ts` which is your CDK App entry file. This is the entry point into your CDK config will use
     - `stack.ts` a simple example CDK stack configuration
 
