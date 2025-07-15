@@ -24,7 +24,7 @@ function prepareLefthookConfig(currentPath: string): boolean {
 	try {
 		// create Lefthook config
 		if (!existsSync(currentPath)) mkdirSync(currentPath, { recursive: true })
-		const LefthookConfigLocation = join(currentPath, 'Lefthook.json')
+		const LefthookConfigLocation = join(currentPath, 'lefthook.yml')
 
 		if (!existsSync(LefthookConfigLocation)) {
 			writeFileSync(
