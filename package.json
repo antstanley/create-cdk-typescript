@@ -1,18 +1,18 @@
 {
 	"name": "create-cdkts",
-	"version": "0.0.6",
+	"version": "0.1.0",
 	"description": "Command Line utility to bootstrap a TypeScript CDK project",
 	"main": "dist/index.js",
 	"type": "module",
 	"scripts": {
 		"build": "tsc",
-		"publish": "npx lint-staged && vitest run && npm run build && npm publish",
+		"publish": "npm run lint && vitest run && npm run build && npm run format && npm publish",
 		"test": "vitest",
 		"lint": "oxlint .",
 		"format": "npx @biomejs/biome format --write ."
 	},
 	"bin": {
-		"create-cdkts": "./bin/create-cdkts.js"
+		"create-cdkts": "bin/create-cdkts.js"
 	},
 	"files": [
 		"dist/**/*"
@@ -48,5 +48,9 @@
 		"tsx": "^4.20.3",
 		"yaml": "^2.8.0",
 		"yargs-parser": "^22.0.0"
+	},
+	"directories": {
+		"lib": "lib",
+		"test": "tests"
 	}
 }
