@@ -1,7 +1,7 @@
-import { spawn } from 'node:child_process'
 import addScripts from './actions/addScripts.js'
 import createCDKFiles from './actions/createCDKfiles.js'
 import detectPackageManager from './actions/detectPackageManager.js'
+import installDependencies from './actions/installDependencies.js'
 import prepareBiomeConfig from './actions/prepareBiomeJson.js'
 import prepareCdkJson from './actions/prepareCdkJson.js'
 import prepareInstall from './actions/prepareInstall.js'
@@ -84,25 +84,15 @@ function integrateProject(config: Config): boolean {
 				params: [workingPath, cdkPath, config.name],
 				text: `Creating CDK files in ${cdkPath} ...`
 			},
-			packageInstall: {
-				method: spawn,
-				params: [installCommand.command, ...installCommand.args],
+			installDependencies: {
+				method: installDependencies,
+				params: [workingPath, installCommand.command, installCommand.args],
 				text: `Installing dependencies using ${installCommand.command} ...`
-			},
-			gitInit: {
-				method: spawn,
-				params: ['git', 'init'],
-				text: `Initiating Git repository ...`
-			},
-			installLefthook: {
-				method: spawn,
-				params: ['npx', 'lefthook', 'install'],
-				text: 'Installing Git hooks with Lefthook ...'
 			}
 		}
 
 		Object.keys(commands).map((key: string) => {
-			const { method, params, text } = commands[key]
+			let { method, params, text } = commands[key]
 
 			let skipStep = false
 			switch (key) {
@@ -121,6 +111,11 @@ function integrateProject(config: Config): boolean {
 				console.log(`Skipping ${key} step ...`)
 			} else {
 				if (text) console.log(text)
+
+				if (key === 'installDependencies') {
+					params = [workingPath, installCommand.command, installCommand.args]
+				}
+
 				const commandResult = method(...params)
 				if (commandResult) {
 					commands[key].result = commandResult
